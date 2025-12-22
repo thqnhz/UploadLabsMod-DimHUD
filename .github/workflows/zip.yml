@@ -1,0 +1,36 @@
+name: Compress on version tag
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Prepare mod folder structure
+        run: |
+          mkdir -p mods-unpacked/ThqnhZ-DimHUD
+          shopt -s dotglob
+          mv !(mods-unpacked) mods-unpacked/ThqnhZ-DimHUD/
+
+      - name: Create ZIP archive
+        run: |
+          zip -r "ThqnhZ-DimHUD.zip" mods-unpacked \
+          -x "mods-unpacked/ThqnhZ-DimHUD/.git/*" \
+             "mods-unpacked/ThqnhZ-DimHUD/.github/*"
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "ThqnhZ-DimHUD.zip"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
