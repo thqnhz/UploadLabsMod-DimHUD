@@ -19,8 +19,12 @@ jobs:
       - name: Prepare mod folder structure
         run: |
           mkdir -p mods-unpacked/ThqnhZ-DimHUD
-          shopt -s dotglob
-          mv !(mods-unpacked) mods-unpacked/ThqnhZ-DimHUD/
+          for item in * .*; do
+            case "$item" in
+              . | .. | mods-unpacked) continue ;;
+            esac
+            mv "$item" mods-unpacked/ThqnhZ-DimHUD/
+          done
 
       - name: Create ZIP archive
         run: |
