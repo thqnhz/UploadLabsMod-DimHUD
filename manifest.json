@@ -13,6 +13,7 @@
             ],
             "config_schema": {},
             "description_rich": "",
+	    "description": "",
             "image": null,
             "incompatibilities": [],
             "load_before": [],
@@ -22,6 +23,6 @@
     },
     "name": "DimHUD",
     "namespace": "ThqnhZ",
-    "version_number": "1.1.0",
+    "version_number": "1.1.1",
     "website_url": "https://github.com/thqnhz/UploadLabsMod-DimHUD"
 }
